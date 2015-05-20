@@ -1,14 +1,21 @@
 var angular = require('angular');
-var router = require('angular-ui-router');
 var chassis = require('chassis').name;
 
 angular
-    .module('spscp', [chassis, router])
+    .module('spscp', [chassis])
     .factory('$exceptionHandler', require('exceptionHandler'))
-    .controller('testCont', function(){
+    .config(function ($locationProvider) {
 
-      this.publicMethod = function() {
-        console.log('running test controller public method');
-      }
+        /**
+         * Use this to enable the HTML5 Mode for the UI Router.
+         * webpack-dev-server doesn't handle URL rewrites, so
+         * it doesn't work all that great during development.
+         *
+
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+        */
 
     });

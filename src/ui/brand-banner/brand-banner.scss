@@ -1,8 +1,10 @@
 sps-brand-banner {
 
     display: block;
+    position: fixed;
     width: 100%;
     height: 45px;
+    top: 0;
     background: #00AAE5;
 
     .logo {

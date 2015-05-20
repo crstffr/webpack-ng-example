@@ -35,6 +35,7 @@ var config = {
             'core/sass',
             'core/models',
             'core/constants',
+            'core/collections',
             'core/utils'
         ]
     },
@@ -78,7 +79,8 @@ var config = {
         info: false, //  --no-info option
         hot: true,
         inline: true,
-        port: 9090
+        port: 9090,
+        colors: true
     },
 
     addVendor: function (name, path, exports) {
