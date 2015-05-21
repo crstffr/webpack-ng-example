@@ -1,8 +1,8 @@
 
+var UserApi = require('user.api');
 var UserModel = require('user.model');
-var UserApi = require('user.api').getInstance();
 
-module.exports = require('serviceFactory')(UsersCollection);
+module.exports = require('makeSingleton')(UsersCollection);
 
 /**
  *
@@ -11,14 +11,19 @@ module.exports = require('serviceFactory')(UsersCollection);
 function UsersCollection() {
 
     /**
-     * Memoized storage object of Users, stored with user id as key.
+     * Memoized Users storage object, keys are user IDs, values are
+     * instances of UserModel.
      *
      * @type {{}}
      * @private
      */
     var _users = {};
 
+    var id = Math.random();
+
     return {
+        id: id,
+        users: users,
         fetchAll: fetchAll,
         fetchById: fetchById,
         fetchByOrgId: fetchByOrgId,
@@ -27,9 +32,20 @@ function UsersCollection() {
 
     ////////////
 
-    function _collect(results) {
+    /**
+     * Collection method, maps an array of results from calls to
+     * the UsersAPI into an array of UserModels. If the UserModel
+     * has already been created for a given User ID, then return
+     * the previous instance, otherwise create a new one and save
+     * it in the memoized _users lookup object.
+     *
+     * @param response
+     * @returns {Array}
+     * @private
+     */
+    function _collect(response) {
 
-        return results.body.map(function(user) {
+        return response.body.map(function(user) {
 
             // check for an existing instance of this user,
             // if one does not exist then create a new one
@@ -37,20 +53,23 @@ function UsersCollection() {
 
             if (!_users[user.id]) {
                 _users[user.id] = new UserModel(user);
-                console.log('new User:', _users[user.id]);
             }
 
             return _users[user.id];
         });
+    }
 
+    function users() {
+        return _users;
     }
 
     function fetchAll() {
+        console.log('fetching from collection instance: ', id);
         return UserApi.fetchAll().then(_collect);
     }
 
     function fetchById(id) {
-
+        return UserApi.fetchOne(id).then(_collect);
     }
 
     function fetchByOrgId(id) {

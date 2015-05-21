@@ -1,13 +1,17 @@
 var angular = require('angular');
 var router = require('angular-ui-router');
 
-var users = require('users.collection').getInstance();
-var listView = require('./views/list/users.list.html');
-var detailView = require('./views/detail/users.detail.html');
+var UsersCollection = require('users.collection').getInstance();
+
+var templates = {
+    list:   require('./views/list/users.list.html'),
+    detail: require('./views/detail/users.detail.html')
+};
 
 module.exports = angular
     .module('users.app', [router])
     .directive('usersApp', UsersAppDirective)
+    .value('UsersCollection', UsersCollection)
     .config(UsersAppRoutes);
 
 function UsersAppDirective() {
@@ -43,13 +47,13 @@ function UsersAppRoutes($stateProvider, $urlRouterProvider) {
         .state('users.list', {
             url: "/list",
             controllerAs: 'cont',
-            templateUrl: listView,
-            resolve: {users: users.fetchAll},
+            templateUrl: templates.list,
+            resolve: {users: UsersCollection.fetchAll},
             controller: require('./views/list/users.list')
         })
         .state('users.detail', {
             url: "/detail/:id",
-            template: detailView,
+            template: templates.detail,
             controller: require('./views/detail/users.detail')
         });
 

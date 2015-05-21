@@ -5,9 +5,6 @@ module.exports = function (fn) {
                 this.instance = new fn();
             }
             return this.instance;
-        },
-        getService: function () {
-            return fn;
         }
     }
 };

@@ -3,5 +3,15 @@
 <p>Lets try to iterate over a list of users from an API</p>
 
 <ul>
-    <li ng-repeat="user in cont.users">{{user.name}}: {{user.address.toOneLine()}}</li>
+    <li ng-repeat="user in cont.users">
+        <input type="text" ng-model="user.name">
+        {{user.address.toOneLine()}}
+    </li>
 </ul>
+
+<ul>
+    <li ng-repeat="user in cont.moreusers">{{user.name}}</li>
+</ul>
+
+<p ng-bind="cont.users[0].name"></p>
+<p ng-bind="cont.moreusers[0].name"></p>

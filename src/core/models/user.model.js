@@ -10,7 +10,7 @@ module.exports = UserModel;
  */
 function UserModel(data) {
 
-    // check.assert.object(data, 'UserModel expects data object');
+    data = check.object(data) ? data : {};
 
     this.id = data.id || 0;
     this.name = data.name || '';

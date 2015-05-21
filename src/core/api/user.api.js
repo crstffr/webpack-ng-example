@@ -1,6 +1,7 @@
+var check = require('check-types');
 var request = require('superagent-promise');
 
-module.exports = require('serviceFactory')(UserAPI);
+module.exports = new UserAPI();
 
 /**
  *
@@ -8,11 +9,15 @@ module.exports = require('serviceFactory')(UserAPI);
  */
 function UserAPI() {
 
-    var apiUrl = 'http://jsonplaceholder.typicode.com/users';
+    var server = 'http://jsonplaceholder.typicode.com/';
 
     this.fetchAll = function() {
-        console.log('Making an API request');
-        return request('GET', apiUrl).end();
-    }
+        return request('GET', server + 'users').end();
+    };
+
+    this.fetchOne = function(id) {
+        id = check.string(id) ? id : '';
+        return request('GET', server + 'user/' + id).end();
+    };
 
 }
