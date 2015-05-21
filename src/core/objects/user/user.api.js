@@ -1,5 +1,6 @@
 var check = require('check-types');
 var request = require('superagent-promise');
+var constants = require('./user.constants');
 
 module.exports = new UserAPI();
 
@@ -9,7 +10,7 @@ module.exports = new UserAPI();
  */
 function UserAPI() {
 
-    var server = 'http://jsonplaceholder.typicode.com/';
+    var server = constants.API_URL;
 
     this.fetchAll = function() {
         return request('GET', server + 'users').end();

@@ -1,14 +1,14 @@
 
-var UserApi = require('user.api');
-var UserModel = require('user.model');
+var UserApi = require('./user.api');
+var UserModel = require('./user.model');
 
-module.exports = require('makeSingleton')(UsersCollection);
+module.exports = require('makeSingleton')(UserCollection);
 
 /**
  *
  * @constructor
  */
-function UsersCollection() {
+function UserCollection() {
 
     /**
      * Memoized Users storage object, keys are user IDs, values are

@@ -6,13 +6,19 @@ var sidebar = require('sidebar').name;
 var viewport = require('viewport').name;
 var banner = require('brand-banner').name;
 var switcher = require('app-switcher').name;
+
+// This is needed so that the Users "App" module is
+// available as a dependency to the chassis. I don't
+// particularly like this method of sub-application
+// bootstrapping (since Angular does not support
+// nested apps).
+
 var usersApp = require('apps/users/users.app').name;
 
-var chassis = module.exports = angular
+module.exports = angular
     .module('chassis', [spsui, router, usersApp])
     .directive('spsChassis', ChassisDirective)
     .config(ChassisRoutes);
-
 
 /**
  *
@@ -26,7 +32,7 @@ function ChassisRoutes($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('users', {
             url: "/users",
-            template: '<users-app></users-app>',
+            template: '<users-app></users-app>'
         })
         .state('companies', {
             url: "/companies",
@@ -47,20 +53,6 @@ function ChassisRoutes($stateProvider, $urlRouterProvider) {
 function ChassisDirective() {
     return {
         restrict: 'E',
-        transclude: true,
-        controller: ChassisController,
-        templateUrl: require('./chassis.html'),
-        link: function (scope, element, attrs, controller) {
-
-        }
+        templateUrl: require('./chassis.html')
     };
-}
-
-/**
- *
- * @constructor
- * @ngInject
- */
-function ChassisController() {
-
 }

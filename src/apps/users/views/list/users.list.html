@@ -1,6 +1,6 @@
 <h1>Users</h1>
 
-<p>Lets try to iterate over a list of users from an API</p>
+<h3>Let's iterate over a list, populated by resolved required JS class</h3>
 
 <ul>
     <li ng-repeat="user in cont.users">
@@ -9,9 +9,17 @@
     </li>
 </ul>
 
+<h3>Let's iterate over a list, populated from Angular DI service in the Controller</h3>
 <ul>
     <li ng-repeat="user in cont.moreusers">{{user.name}}</li>
 </ul>
 
+<h3>Let's iterate over a list, populated by resolved before route via Angular DI service</h3>
+<ul>
+    <li ng-repeat="user in cont.evenmore">{{user.name}}</li>
+</ul>
+
+<h3>These should be identical because they reference the same object instance</h3>
 <p ng-bind="cont.users[0].name"></p>
 <p ng-bind="cont.moreusers[0].name"></p>
+<p ng-bind="cont.evenmore[0].name"></p>

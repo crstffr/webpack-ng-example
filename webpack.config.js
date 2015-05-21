@@ -34,6 +34,7 @@ var config = {
             'core/api',
             'core/sass',
             'core/models',
+            'core/objects',
             'core/constants',
             'core/collections',
             'core/utils'
