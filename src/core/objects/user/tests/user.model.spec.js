@@ -1,7 +1,7 @@
 var UserModel = require('../user.model.js');
 var AddressModel = require('address.model');
 
-var testData1 = {
+var testData = {
     id: 1,
     name: 'Test Tester',
     email: 'test@email.com',
@@ -20,18 +20,18 @@ describe("UserModel", function () {
     });
 
     it("instantiates with data", function () {
-        var inst = new UserModel(testData1);
+        var inst = new UserModel(testData);
         expect(inst instanceof UserModel).toBe(true);
         expect(inst.id).toBe(1);
     });
 
     it("address is an instance of AddressModel", function () {
-        var inst = new UserModel(testData1);
+        var inst = new UserModel(testData);
         expect(inst.address instanceof AddressModel).toBe(true);
     });
 
     it("says hello", function () {
-        var inst = new UserModel(testData1);
+        var inst = new UserModel(testData);
         expect(inst.sayHello()).toBe('Hello Test Tester');
     });
 

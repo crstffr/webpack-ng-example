@@ -48,7 +48,16 @@ module.exports = function (config) {
         coverageReporter: {
             dir: 'coverage/',
             reporters: [
-                {type: 'html', subdir: 'report-html'} // Human readable
+                {
+                    type: 'html',
+                    subdir: 'report-html',
+                    watermarks: {
+                        statements: [90, 100],
+                        functions: [90, 100],
+                        branches: [90, 100],
+                        lines: [90, 100]
+                    }
+                }
             ]
         },
         webpack: {
@@ -56,7 +65,7 @@ module.exports = function (config) {
                 loaders: [],
                 postLoaders: [{
                     test: /\.js$/,
-                    exclude: /(node_modules|bower_components)\//,
+                    exclude: /((node_modules|bower_components)\/)|\.spec\.js/,
                     loader: 'istanbul-instrumenter'
                 }]
             },
@@ -75,7 +84,7 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['mocha', 'coverage', 'html'],
+        reporters: ['mocha', 'coverage'],
 
 
         // web server port

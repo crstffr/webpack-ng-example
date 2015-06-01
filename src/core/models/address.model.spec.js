@@ -1,6 +1,6 @@
 var AddressModel = require('address.model');
 
-var testData1 = {
+var testData = {
     street: '123 South Street',
     suite: 'Apt 456',
     city: 'Cityville',
@@ -20,14 +20,20 @@ describe("AddressModel", function () {
     });
 
     it("instantiates with data", function () {
-        var inst = new AddressModel(testData1);
+        var inst = new AddressModel(testData);
         expect(inst instanceof AddressModel).toBe(true);
     });
 
     it("generates a single line address", function() {
-        var inst = new AddressModel(testData1);
+        var inst = new AddressModel(testData);
         var result = "123 South Street Apt 456, Cityville ST, 00000";
         expect(inst.toOneLine()).toBe(result);
+    });
+
+    it("generates a multi line address", function() {
+        var inst = new AddressModel(testData);
+        var result = "Address\nin multiple\nlines...";
+        expect(inst.toMultiLine()).toBe(result);
     });
 
 });

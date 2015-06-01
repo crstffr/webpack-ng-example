@@ -10,9 +10,7 @@ module.exports = UserModel;
  */
 function UserModel(data) {
 
-    if (!check.object(data)) {
-        data = {};
-    }
+    data = (check.object(data)) ? data : {};
 
     this.id = data.id || 0;
     this.name = data.name || '';
