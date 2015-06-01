@@ -28,7 +28,7 @@ AddressModel.prototype.toOneLine = function() {
     return [
         this.street, ' ',
         this.suite, ', ',
-        this.city,
+        this.city, ' ',
         this.state, ', ',
         this.zipcode
     ].join('');

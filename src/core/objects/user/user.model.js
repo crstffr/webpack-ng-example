@@ -10,7 +10,9 @@ module.exports = UserModel;
  */
 function UserModel(data) {
 
-    data = check.object(data) ? data : {};
+    if (!check.object(data)) {
+        data = {};
+    }
 
     this.id = data.id || 0;
     this.name = data.name || '';
@@ -25,3 +27,9 @@ function UserModel(data) {
     //////////////////////////////////
 
 }
+
+UserModel.prototype.sayHello = function() {
+
+    return 'Hello ' + this.name;
+
+};

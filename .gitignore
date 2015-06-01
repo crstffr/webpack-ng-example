@@ -1,5 +1,6 @@
 .idea
 node_modules
+coverage
 dist
 build/*.js
 build/ui
